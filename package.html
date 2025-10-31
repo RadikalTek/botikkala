@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>بسته‌های کرایه سایت رادیکال‌تِک</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: linear-gradient(135deg, #1a0033 0%, #330066 30%, #6600cc 60%, #9933ff 80%, #cc99ff 100%);
+    color: #fff;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* ستاره‌های درخشان */
+  .stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .star {
+    position: absolute;
+    background: #fff;
+    border-radius: 50%;
+    animation: twinkle 3s infinite;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1); }
+  }
+
+  .container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    font-size: 42px;
+    background: linear-gradient(45deg, #ff66cc, #ff99ff, #ffccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 40px;
+    text-shadow: 0 0 30px rgba(255, 102, 204, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from { text-shadow: 0 0 20px rgba(255, 102, 204, 0.5); }
+    to { text-shadow: 0 0 30px rgba(255, 102, 204, 0.8), 0 0 40px rgba(255, 102, 204, 0.6); }
+  }
+
+  .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+    max-width: 800px;
+  }
+
+  .btn {
+    background: linear-gradient(145deg,
+      #330066 0%,
+      #6600cc 50%,
+      #9933ff 100%);
+    color: #fff;
+    border: 2px solid #cc99ff;
+    padding: 20px 40px;
+    border-radius: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 8px 32px rgba(153, 51, 255, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent);
+    transition: left 0.5s;
+  }
+
+  .btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow:
+      0 15px 40px rgba(153, 51, 255, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    border-color: #ffccff;
+  }
+
+  .btn:hover::before {
+    left: 100%;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(26, 0, 51, 0.8);
+    backdrop-filter: blur(10px);
+    display: none;
+    z-index: 999;
+  }
+
+  .popup {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(145deg,
+      #330066 0%,
+      #6600cc 30%,
+      #9933ff 70%,
+      #cc99ff 100%);
+    border: 2px solid #cc99ff;
+    box-shadow:
+      0 0 60px rgba(153, 51, 255, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 35px;
+    width: 380px;
+    display: none;
+    z-index: 1000;
+    color: #fff;
+    backdrop-filter: blur(20px);
+  }
+
+  .popup h3 {
+    background: linear-gradient(45deg, #ff66cc, #ff99ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    border-bottom: 2px solid #ff66cc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .popup ul {
+    list-style: none;
+    padding-right: 0;
+    margin: 20px 0;
+  }
+
+  .popup li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    border-bottom: 1px dashed rgba(204, 153, 255, 0.3);
+    padding-bottom: 8px;
+    transition: all 0.3s ease;
+  }
+
+  .popup li:hover {
+    transform: translateX(-5px);
+    border-color: #ff66cc;
+  }
+
+  .price {
+    color: #ffccff;
+    font-weight: bold;
+  }
+
+  .price del {
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 8px;
+  }
+
+  .totals {
+    margin-top: 25px;
+    border-top: 2px solid #ff66cc;
+    padding-top: 15px;
+    text-align: center;
+    font-size: 18px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    border-radius: 15px;
+  }
+
+  .totals span {
+    background: linear-gradient(45deg, #ff66cc, #ff99ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .popup button.close {
+    background: linear-gradient(145deg, #ff3366, #ff6699, #ff99cc);
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 12px;
+    cursor: pointer;
+    float: left;
+    box-shadow: 0 6px 20px rgba(255, 51, 102, 0.4);
+    transition: all 0.3s ease;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.popup button.close:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255, 51, 102, 0.6);
+    background: linear-gradient(145deg, #ff1a53, #ff4d88, #ff80b3);
+}
+
+  /* صفحه سفارشی تمام‌صفحه */
+  .popup.fullscreen {
+    top: 0;
+    left: 0;
+    transform: none;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    padding: 0;
+    background: linear-gradient(135deg,
+      #1a0033 0%,
+      #330066 20%,
+      #6600cc 40%,
+      #9933ff 60%,
+      #cc99ff 80%,
+      #ffccff 100%);
+    box-shadow: none;
+    overflow: hidden;
+    display: none;
+    z-index: 1000;
+  }
+
+  .popup.fullscreen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.5"/></svg>') repeat;
+    animation: starsMove 20s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes starsMove {
+    from { transform: translateY(0px); }
+    to { transform: translateY(-100px); }
+  }
+
+  .popup.fullscreen .fullscreen-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 80px 20px 120px;
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+    overflow-y: auto;
+    height: 100vh;
+  }
+
+  .popup.fullscreen h3 {
+    text-align: center;
+    font-size: 36px;
+    background: linear-gradient(45deg, #ff66cc, #ff99ff, #ffccff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 0 30px rgba(255, 102, 204, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+    margin-bottom: 10px;
+  }
+
+  .options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 30px;
+  }
+
+  .option-btn {
+    background: linear-gradient(145deg,
+      rgba(51, 0, 102, 0.9) 0%,
+      rgba(153, 51, 255, 0.9) 100%);
+    color: #fff;
+    border: 2px solid #cc99ff;
+    padding: 18px 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.4s ease;
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow:
+      0 6px 25px rgba(153, 51, 255, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    min-height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .option-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    border-color: #ffccff;
+    box-shadow:
+      0 10px 35px rgba(153, 51, 255, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  .option-btn.active {
+    background: linear-gradient(145deg,
+      #ff66cc 0%,
+      #ff99ff 50%,
+      #cc99ff 100%);
+    color: #000;
+    font-weight: bold;
+    border-color: #ff66cc;
+    box-shadow:
+      0 0 25px rgba(255, 102, 204, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: scale(1.03);
+  }
+
+  .total-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(51, 0, 102, 0.95) 20%,
+      rgba(51, 0, 102, 0.98) 100%);
+    backdrop-filter: blur(15px);
+    border-top: 2px solid #ff66cc;
+    z-index: 1002;
+  }
+
+  .total {
+    font-size: 24px;
+    background: linear-gradient(45deg, #ff66cc, #ff99ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px 35px;
+    border-radius: 15px;
+    box-shadow:
+      0 8px 30px rgba(153, 51, 255, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    width: 90%;
+    max-width: 350px;
+    border: 2px solid #ff66cc;
+    backdrop-filter: blur(10px);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+  }
+
+  .close.full {
+    background: linear-gradient(145deg, #ff3366, #ff6699);
+    border: none;
+    color: #fff;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 12px;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 6px 20px rgba(255, 51, 102, 0.4);
+    transition: all 0.3s ease;
+  }
+
+  .close.full:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(255, 51, 102, 0.6);
+  }
+
+  /* اسکرول بار زیبا */
+  .popup.fullscreen .fullscreen-content::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .popup.fullscreen .fullscreen-content::-webkit-scrollbar-track {
+    background: rgba(51, 0, 102, 0.4);
+    border-radius: 10px;
+    margin: 5px;
+  }
+
+  .popup.fullscreen .fullscreen-content::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #cc99ff, #ff66cc);
+    border-radius: 10px;
+    border: 2px solid rgba(51, 0, 102, 0.3);
+  }
+
+  .popup.fullscreen .fullscreen-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #9933ff, #ff3399);
+  }
+
+  /* نشانگر اسکرول */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #ff66cc;
+    font-size: 14px;
+    text-align: center;
+    animation: bounce 2s infinite;
+    background: rgba(51, 0, 102, 0.8);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid #ff66cc;
+    backdrop-filter: blur(10px);
+  }
+
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+    40% { transform: translateX(-50%) translateY(-8px); }
+    60% { transform: translateX(-50%) translateY(-4px); }
+  }
+
+  /* محتوای اضافی برای تست اسکرول */
+  .extra-content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 10px;
+  }
+
+  .info-box {
+    background: rgba(51, 0, 102, 0.6);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #cc99ff;
+    text-align: center;
+    font-size: 14px;
+    color: #ffccff;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ستاره‌های درخشان -->
+<div class="stars" id="stars"></div>
+
+<div class="container">
+  <h1>بسته‌های ویژه کرایه سایت رادیکال‌تِک</h1>
+  <div class="buttons">
+    <!--
+    <button class="btn" onclick="openPopup('eco')">پکیچ اقتصادی</button>
+    <button class="btn" onclick="openPopup('super')">پکیچ فوق‌العاده</button>
+    <button class="btn" onclick="openPopup('simple')">پکیچ پیشنهادی</button>
+    -->
+    <button class="btn" onclick="openPopup('custom')">پکیچ سفارشی</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+<!-- پاپ‌آپ‌ها -->
+<!-- بسته اقتصادی 
+<div class="popup" id="eco">
+  <button class="close" onclick="closeAll()">بستن</button>
+  <h3>پکیچ اقتصادی</h3>
+  <ul>
+    <li><span>تبلیغات پایه در اینستاگرام</span> <span class="price"><del>100,000</del> 70,000</span></li>
+    <li><span>یک بنر طراحی رایگان</span> <span class="price">رایگان</span></li>
+    <li><span>پشتیبانی محدود ۷ روزه</span> <span class="price"><del>50,000</del> 40,000</span></li>
+  </ul>
+  <div class="totals">
+    مجموع قبل تخفیف: <span>150,000</span> تومان<br>
+    مجموع بعد تخفیف: <span>110,000</span> تومان
+  </div>
+</div>
+-->
+<!--بسته فوق‌العاده 
+<div class="popup" id="super">
+  <button class="close" onclick="closeAll()">بستن</button>
+  <h3>پکیچ فوق‌العاده</h3>
+  <ul>
+    <li><span>تبلیغات حرفه‌ای چند پلتفرمی</span> <span class="price"><del>300,000</del> 250,000</span></li>
+    <li><span>سه طرح گرافیکی رایگان</span> <span class="price">رایگان</span></li>
+    <li><span>پشتیبانی یک‌ماهه VIP</span> <span class="price"><del>120,000</del> 90,000</span></li>
+  </ul>
+  <div class="totals">
+    مجموع قبل تخفیف: <span>420,000</span> تومان<br>
+    مجموع بعد تخفیف: <span>340,000</span> تومان
+  </div>
+</div>
+-->
+<!-- بسته ساده 
+<div class="popup" id="simple">
+  <button class="close" onclick="closeAll()">بستن</button>
+  <h3>پکیچ پیشنهادی</h3>
+  <ul>
+    <li><span>یک پست تبلیغاتی</span> <span class="price"><del>60,000</del> 50,000</span></li>
+    <li><span>پشتیبانی یک‌روزه</span> <span class="price">20,000</span></li>
+  </ul>
+  <div class="totals">
+    مجموع قبل تخفیف: <span>80,000</span> تومان<br>
+    مجموع بعد تخفیف: <span>70,000</span> تومان
+  </div>
+</div>
+-->
+<!-- بسته سفارشی تمام‌صفحه -->
+<div class="popup fullscreen" id="custom">
+  <button class="close full" onclick="closeAll()">بستن ✖</button>
+  <div class="fullscreen-content">
+    <h3>پکیچ سفارشی رادیکال‌تِک</h3>
+   
+   <div class="extra-content">
+    <div class="info-box" style="font-size: large;">⭐ <p><strong>کرایه ماهیانه سایت بوتیکالا :</strong></p>
+
+<p>شامل 50 عدد محصول (با امکان ثبت تنوع رنگ و سایز)</p>
+
+<p>حداکثر 50 مشتری در ماه</p>
+
+<p>حداکثر 30 سفارش در ماه</p>
+
+<p><strong>هزینه‌ی پایه:</strong> از 3 میلیون تومان ماهانه</p>
+
+<p><strong>پورسانت فروش:</strong> از %1 به ازای هر محصول</p>
+
+
+      <div class="info-box" style="margin: 15px;">🎯 <p><strong>هزینه‌های اضافه:</strong></p>
+
+<p>به‌ازای هر محصول اضافه: 10 هزار تومان</p>
+
+<p>به‌ازای هر 10 مشتری اضافه در ماه: 10 هزار تومان</p>
+
+<p>به‌ازای هر 5 سفارش اضافه در ماه: 10 هزار تومان</p></div></div>
+      <div class="info-box">💡 علاوه بر سرویس پایه بالا، این امکان وجود دارد که جهت تقویت پکیج و افزایش بازدهی و میزان فروش، چندین سرویس تکمیلی از فهرست زیر انتخاب و به پکیج افزوده شود.</div>
+      <div class="info-box">⭐ سرویس‌های انتخاب شده با رنگ صورتی مشخص می‌شوند</div>
+      <div class="info-box">🎯 قیمت نهایی در پایین صفحه همیشه قابل مشاهده است</div>
+    </div>
+   
+    <div class="options">
+      <button class="option-btn" data-price="2000000">
+
+ارائه خدمات ادمین سایت به‌ صورت تمام‌ وقت شامل: <br>
+
+افزودن و ویرایش اطلاعات و محصولات،
+
+بارگذاری و به‌روزرسانی تصاویر و اطلاعات محصولات ،
+
+مدیریت موجودی و انبار داری ,
+
+کنترل نظم و کیفیت محتوای سایت : <br>
+
+
+  شروع قیمت از 2 میلیون تومان می‌باشد.</button>
+      <button class="option-btn" data-price="250000">اسلایدر : هر اسلاید 250 هزار تومان ماهیانه</button>
+      <button class="option-btn" data-price="200000">بنر ثابت صفحه ی اول : 200 هزار تومان ماهیانه</button>
+      <button class="option-btn" data-price="100000">افزودن محصول به بنر پرفروش ترین ها ( در صورت بالا بودن میزان فروش محصول ) : 100 هزار تومان ماهیانه
+</button>
+      <button class="option-btn" data-price="0">فتوشاپ و فیلم سازی (طراحی تصاویر محصولات و تولید محتوا : فیلم و پوستر و بنر ) : غیرفعال</button>
+      </div>
+   
+  
+   
+    <div class="total-container">
+      <div class="total">مبلغ کل: <span id="totalPrice"></span> تومان</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ایجاد ستاره‌های درخشان
+function createStars() {
+  const starsContainer = document.getElementById('stars');
+  const starCount = 150;
+ 
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+   
+    const left = Math.random() * 100;
+    const top = Math.random() * 100;
+    const size = Math.random() * 3 + 1;
+    const delay = Math.random() * 3;
+    const duration = Math.random() * 2 + 2;
+   
+    star.style.left = left + 'vw';
+    star.style.top = top + 'vh';
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.animationDelay = delay + 's';
+    star.style.animationDuration = duration + 's';
+   
+    starsContainer.appendChild(star);
+  }
+}
+
+createStars();
+
+const overlay = document.getElementById('overlay');
+const popups = document.querySelectorAll('.popup');
+let total = 0;
+
+function openPopup(id) {
+  closeAll();
+  const popup = document.getElementById(id);
+  popup.style.display = 'block';
+  overlay.style.display = id === 'custom' ? 'none' : 'block';
+ 
+  // اگر صفحه سفارشی است، event listener ها را تنظیم کن
+  if (id === 'custom') {
+    setTimeout(initializeCustomPage, 100);
+  }
+}
+
+function closeAll() {
+  popups.forEach(p => p.style.display = 'none');
+  overlay.style.display = 'none';
+  total = 0;
+  updateTotalDisplay();
+}
+
+function initializeCustomPage() {
+  const optionButtons = document.querySelectorAll('#custom .option-btn');
+ 
+  optionButtons.forEach(btn => {
+    // حذف event listener های قبلی
+    btn.replaceWith(btn.cloneNode(true));
+  });
+ 
+  // event listener های جدید
+  const newOptionButtons = document.querySelectorAll('#custom .option-btn');
+ 
+  newOptionButtons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const price = parseInt(this.getAttribute('data-price'));
+     
+      if (this.classList.contains('active')) {
+        this.classList.remove('active');
+        total -= price;
+      } else {
+        this.classList.add('active');
+        total += price;
+      }
+     
+      updateTotalDisplay();
+    });
+  });
+ 
+  // ریست کردن وضعیت
+  total = 3000000;
+  updateTotalDisplay();
+  newOptionButtons.forEach(btn => btn.classList.remove('active'));
+}
+
+function updateTotalDisplay() {
+  const totalElement = document.getElementById('totalPrice');
+  if (totalElement) {
+    totalElement.textContent = total.toLocaleString('fa-IR');
+    console.log('مجموع قیمت:', total);
+  }
+}
+
+// پنهان کردن نشانگر اسکرول هنگام اسکرول
+const customContent = document.querySelector('#custom .fullscreen-content');
+if (customContent) {
+  customContent.addEventListener('scroll', function() {
+    const indicator = document.querySelector('.scroll-indicator');
+    if (this.scrollTop > 100) {
+      indicator.style.opacity = '0';
+      indicator.style.visibility = 'hidden';
+    } else {
+      indicator.style.opacity = '1';
+      indicator.style.visibility = 'visible';
+    }
+  });
+}
+
+// تست: اضافه کردن لاگ برای دیباگ
+console.log('اسکرول فعال شد. محتوای قابل اسکرول:', customContent);
+
+// اضافه کردن event listener برای دکمه‌های اصلی
+document.querySelectorAll('.btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const target = this.getAttribute('onclick').match(/'([^']+)'/)[1];
+    openPopup(target);
+  });
+});
+</script>
+</body>
+</html>
